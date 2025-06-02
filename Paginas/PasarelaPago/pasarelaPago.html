@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pasarela de Pago | Fercomet</title>
+  <link rel="stylesheet" href="pasarelaPago.css">
+</head>
+<body>
+  <div class="pago-container">
+    <div class="pago-header">
+      <img src="/imagenes/Captura de pantalla 2025-04-07 193041.png" alt="Fercomet" class="logo-fercomet" style="width:180px; margin-bottom:10px;">
+      <h1>Pasarela de Pago</h1>
+    </div>
+    <div class="metodo-pago-section">
+      <label style="font-weight:bold; margin-bottom:10px; display:block;">Selecciona el método de pago:</label>
+      <div id="metodosPagoBtns" class="metodos-pago-btns-grid">
+        <div class="metodos-row">
+          <button type="button" class="metodo-btn active" data-metodo="tarjeta">
+            <img src="https://img.icons8.com/color/48/000000/bank-card-back-side.png" alt="Tarjeta" class="icon-metodo"> 
+            <span>Tarjeta de crédito/débito</span>
+          </button>
+          <button type="button" class="metodo-btn" data-metodo="transferencia">
+            <img src="https://img.icons8.com/color/48/000000/money-transfer.png" alt="Transferencia" class="icon-metodo"> 
+            <span>Transferencia bancaria</span>
+          </button>
+        </div>
+        <div class="metodos-row">
+          <button type="button" class="metodo-btn" data-metodo="mercadopago">
+            <img src="https://img.icons8.com/color/48/000000/mercado-pago.png" alt="Mercado Pago" class="icon-metodo">
+            <span>Mercado Pago</span>
+          </button>
+          <button type="button" class="metodo-btn" data-metodo="paypal">
+            <img src="https://img.icons8.com/color/48/000000/paypal.png" alt="PayPal" class="icon-metodo">
+            <span>PayPal</span>
+          </button>
+          <button type="button" class="metodo-btn" data-metodo="otro" style="display:none;">
+            <img src="https://img.icons8.com/color/48/000000/help.png" alt="Otro" class="icon-metodo"> 
+            <span>Otro</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <form id="paymentForm" class="pago-form">
+      <label for="cardNumber">Número de tarjeta</label>
+      <div class="input-icon-group">
+        <input type="text" id="cardNumber" maxlength="19" placeholder="0000 0000 0000 0000" required autocomplete="off">
+        <span id="cardTypeIcon" class="card-icon"></span>
+      </div>
+      <label for="cardName">Nombre en la tarjeta</label>
+      <input type="text" id="cardName" required autocomplete="off" placeholder="Fercomet S.A.">
+      <div class="pago-row">
+        <div>
+          <label for="expiry">Expiración</label>
+          <input type="text" id="expiry" maxlength="5" placeholder="MM/AA" required autocomplete="off">
+        </div>
+        <div>
+          <label for="cvv">CVV</label>
+          <div class="input-icon-group">
+            <span id="toggleCvv" class="eye-icon" tabindex="0">&#128065;</span>
+            <input type="password" id="cvv" maxlength="3" required autocomplete="off" style="padding-left:32px;">
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="pago-btn">Pagar</button>
+      <button type="button" class="cancelar-btn" id="cancelarPago">Cancelar</button>
+    </form>
+    <div id="paymentResult"></div>
+    <!-- Input para comprobante de transferencia, oculto por defecto -->
+    <div id="comprobanteTransferenciaContainer" style="display:none; margin-top:18px;">
+      <label for="comprobanteTransferencia" style="font-weight:600;">Adjuntar comprobante de transferencia (opcional):</label>
+      <input type="file" id="comprobanteTransferencia" accept="image/*,.pdf">
+      <div id="comprobantePreview" style="margin-top:8px;"></div>
+    </div>
+    <!-- Contenedor para el botón de PayPal -->
+    <div id="paypal-button-container" style="display:none; margin-top:18px;"></div>
+    <div id="successMessage" class="success-message" style="display:none;">
+      <img src="/imagenes/Captura de pantalla 2025-04-07 193041.png" alt="Fercomet" style="width:180px; margin-bottom:30px; filter:drop-shadow(0 0 10px #fff);">
+      <h2 style="font-size:2.2rem; margin-bottom:10px; text-shadow:0 2px 10px #000;">¡Tu compra fue realizada con éxito!</h2>
+      <p style="font-size:1.1rem; color:#b0e57c; margin-bottom:0;">Serás redirigido al inicio...</p>
+    </div>
+  </div>
+  <!-- SDK de PayPal, pon tu client-id real -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AU8nRAIoDMrbinAE4_MUlc1oZSVtp4OzFflNiSC9-dVTcSSY9UXJd7ysV2XBJuwZk_MeyrZ6wDKSAXga&currency=USD"></script>
+  <script type="module" src="pasarelaPago.js"></script>
+</body>
+</html>
